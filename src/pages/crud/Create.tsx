@@ -1,5 +1,5 @@
 import { useState } from "react";
-import tips from "../../../db.json";
+import tips from "../../../public/db.json";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";

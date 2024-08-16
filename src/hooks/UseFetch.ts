@@ -6,7 +6,7 @@ const useFetch = () => {
 
   const getData = async () => {
     try {
-      const res = await axios("../../db.json");
+      const res = await axios("../../public/db.json");
       const {
         data: { tips },
       } = res;
