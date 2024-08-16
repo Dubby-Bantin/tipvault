@@ -44,21 +44,6 @@ const LatestTips = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <style jsx>{`
-        .swiper-pagination-bullet {
-          background-color: #38bdf8;
-          width: 10px;
-          height: 10px;
-        }
-
-        .swiper-pagination-bullet-active {
-          background-color: #0ea5e9;
-          transform: scale(1.2);
-        }
-        .swiper-pagination {
-          padding: 20px 100px;
-        }
-      `}</style>
     </div>
   );
 };
