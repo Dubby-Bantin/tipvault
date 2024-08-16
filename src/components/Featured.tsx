@@ -2,11 +2,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import FeatureCard from "./FeatureCard";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tip } from "../utils/exports";
 import { isNewTip } from "../utils/IsNewTip";
+import useFetch from "../hooks/UseFetch.ts";
 
 const Featured = () => {
   const navigate = useNavigate();

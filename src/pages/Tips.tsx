@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/UseFetch";
 import pythonLogo from "../assets/4518857_python_icon.png";
 import JavaImg from "../assets/4373217_java_logo_logos_icon.png";
 import reactImg from "../assets/1174949_js_react js_logo_react_react native_icon.png";
@@ -148,14 +148,16 @@ const Tips = () => {
           {isLoading ? (
             <SkeletonCards cards={8} />
           ) : (
-            filteredTips?.slice(start, end)?.map((filteredTip) => (
-              <TipCard
-                key={filteredTip.id}
-                getLanguageBadge={getLanguageBadgeClass}
-                isNew={isNewTip(filteredTip.created_at)} // Pass new tip status to TipCard
-                {...filteredTip}
-              />
-            ))
+            filteredTips
+              ?.slice(start, end)
+              ?.map((filteredTip) => (
+                <TipCard
+                  key={filteredTip.id}
+                  getLanguageBadge={getLanguageBadgeClass}
+                  isNew={isNewTip(filteredTip.created_at)}
+                  {...filteredTip}
+                />
+              ))
           )}
         </div>
         <div className="flex justify-center gap-10 items-center mt-6">
