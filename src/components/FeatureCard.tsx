@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import pythonLogo from "../assets/4518857_python_icon.png";
-import { Tip } from "../utils/exports";
+import { Tip } from "../utils/tips";
+
 
 const FeatureCard = ({
   id,

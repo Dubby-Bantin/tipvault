@@ -1,14 +1,14 @@
+// tips.tsx
 import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import useFetch from "../hooks/UseFetch";
 import { Link } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SkeletonCards from "../components/Skeleton";
 import TipCard from "../components/TipCard";
-import { getLanguageBadgeClass, Tip } from "../utils/exports";
+import { getLanguageBadgeClass } from "../utils/exports";
 import { isNewTip } from "../utils/IsNewTip";
+import { Tip } from "../utils/tips"; // Import the Tip type
 
-// Function to dynamically assign categories based on tags or language
 const assignCategory = (tip: Tip): string => {
   const { language } = tip;
 
@@ -18,19 +18,21 @@ const assignCategory = (tip: Tip): string => {
   if (language === "JavaScript" || language === "React") {
     return "Frontend";
   }
-  return "Miscellaneous"; // Default category if no match
+  return "Miscellaneous";
 };
 
-// Get the badge based on the programming language
+// Load tips from local storage or return an empty array if none exist
+const loadTips = (): Tip[] => {
+  const savedTips = localStorage.getItem('tips');
+  return savedTips ? JSON.parse(savedTips) : [];
+};
 
 const Tips = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { getData, data } = useFetch();
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(10);
-  const [tips, setTips] = useState<Tip[]>([]);
+  const [displayedTips, setDisplayedTips] = useState<Tip[]>([]);
 
-  // States for filters
   const [search, setSearch] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
@@ -43,30 +45,29 @@ const Tips = () => {
   };
 
   const next = () => {
-    if (end < tips.length) {
+    if (end < displayedTips.length) {
       setStart((s) => s + 5);
       setEnd((e) => e + 5);
     }
   };
 
   useEffect(() => {
-    getData();
+    // Load tips from local storage
+    const tips = loadTips();
+
+    const categorizedTips = tips.map((tip) => ({
+      ...tip,
+      category: assignCategory(tip),
+      getLanguageBadge: (language: string) => getLanguageBadgeClass(language),
+    }));
+
+    setDisplayedTips(categorizedTips);
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-  }, [data, getData]);
+  }, []);
 
-  useEffect(() => {
-    const categorizedTips = data.map((tip: Tip) => ({
-      ...tip,
-      category: assignCategory(tip),
-    }));
-
-    setTips(categorizedTips);
-  }, [data]);
-
-  // Filter Logic
-  const filteredTips = tips
+  const filteredTips = displayedTips
     .filter(
       (tip) =>
         tip.title.toLowerCase().includes(search.trim().toLowerCase()) ||
@@ -96,7 +97,6 @@ const Tips = () => {
           <BiSearch className="text-white absolute top-3 right-2" />
         </div>
 
-        {/* Dropdowns for Filtering */}
         <div className="flex flex-wrap justify-center gap-4 mb-6">
           <select
             value={selectedCategory}
@@ -127,22 +127,20 @@ const Tips = () => {
           {isLoading ? (
             <SkeletonCards cards={8} />
           ) : (
-            filteredTips
-              ?.slice(start, end)
-              ?.map((filteredTip) => (
-                <TipCard
-                  id={filteredTip.id}
-                  key={filteredTip.id}
-                  category={filteredTip.category}
-                  title={filteredTip.title}
-                  description={filteredTip.description}
-                  tags={filteredTip.tags}
-                  language={filteredTip.language}
-                  created_at={filteredTip.created_at}
-                  isNew={isNewTip(filteredTip.created_at)}
-                  getLanguageBadge={getLanguageBadgeClass}
-                />
-              ))
+            filteredTips?.slice(start, end)?.map((filteredTip) => (
+              <TipCard
+                id={filteredTip.id}
+                key={filteredTip.id}
+                category={filteredTip.category}
+                title={filteredTip.title}
+                description={filteredTip.description}
+                tags={filteredTip.tags}
+                language={filteredTip.language}
+                created_at={filteredTip.created_at}
+                isNew={isNewTip(filteredTip.created_at)}
+                getLanguageBadge={getLanguageBadgeClass}
+              />
+            ))
           )}
         </div>
         <div className="flex justify-center gap-10 items-center mt-6">
@@ -163,9 +161,9 @@ const Tips = () => {
       <div className="flex justify-end p-4">
         <Link
           to={"/create"}
-          className="py-2 px-5 text-white bg-primary hover:bg-primary/75 rounded-md  font-semibold text-[.8rem]"
+          className="py-2 px-5 text-white bg-primary hover:bg-primary/75 rounded-md font-semibold text-[.8rem]"
         >
-          submit a new tip
+          Submit a New Tip
         </Link>
       </div>
     </div>

@@ -4,29 +4,24 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Tip } from "../utils/exports";
+
 import { isNewTip } from "../utils/IsNewTip";
-import useFetch from "../hooks/UseFetch.ts";
+import { Tip, tips } from "../utils/tips"; // Import the tips array from tips.ts
 
 const Featured = () => {
   const navigate = useNavigate();
-  const { getData, data } = useFetch();
-  const [tips, setTips] = useState<Tip[]>([]);
+  const [displayedTips, setDisplayedTips] = useState<Tip[]>([]);
 
   useEffect(() => {
-    getData();
-  }, [getData, data]);
-
-  useEffect(() => {
-    setTips(data);
-  }, [data]);
+    setDisplayedTips(tips as Tip[]);
+  }, []);
 
   return (
     <div className="py-20 mb-20 w-full flex flex-col items-center">
       <h1 className="text-center mb-10 text-[2rem] md:text-[3rem] text-transparent font-bold bg-clip-text bg-gradient-to-r from-white from-40% via-sky-500 via-50% to-primary to-90%">
         Featured Tips
       </h1>
-      <div className="relative w-full max-w-2xl ">
+      <div className="relative w-full max-w-2xl">
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 2000, disableOnInteraction: false }}
@@ -37,7 +32,7 @@ const Featured = () => {
           loop
           className="w-full"
         >
-          {tips?.slice(0, 5)?.map((tip) => (
+          {displayedTips?.slice(0, 5).map((tip) => (
             <SwiperSlide key={tip?.title}>
               <FeatureCard
                 key={tip?.id}

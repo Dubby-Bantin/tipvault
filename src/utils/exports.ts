@@ -25,15 +25,17 @@ const getLanguageBadgeClass = (language: string) => {
       return "bg-gray-500";
   }
 };
-export interface Tip {
+
+export interface TipCardProps {
   id: string;
   title: string;
   description: string;
-  language: string;
   tags: string[];
-  category: string; // Make the category optional since we are assigning it dynamically
+  language: string;
   created_at: string;
+  category?: string; // Optional if category might be undefined
+  getLanguageBadge: (language: string) => string; // Function type
   isNew: boolean;
-  getLanguageBadge: (param: string) => string;
 }
+
 export { Banner, Featured, Categories, LatestTips, getLanguageBadgeClass };

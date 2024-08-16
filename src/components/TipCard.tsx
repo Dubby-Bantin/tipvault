@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Tip } from "../utils/exports";
+import { TipCardProps } from "../utils/exports";
 
 const TipCard = ({
   title,
@@ -11,7 +11,7 @@ const TipCard = ({
   category,
   getLanguageBadge,
   isNew,
-}: Tip) => {
+}: TipCardProps) => {
   // State to handle modal open/close
   const [isModalOpen, setIsModalOpen] = useState(false);
 
