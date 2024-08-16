@@ -7,7 +7,7 @@ const Footer = () => {
     <div className="bg-secondary lg:py-0 py-10 min-h-[50dvh] text-white flex items-center justify-between lg:px-20 px-10 flex-wrap">
       <div className="flex flex-col gap-5 relative  flex-wrap">
         <Link to={"/"}>
-          <img src={logo} alt="" className="h-14 w-[3.5rem] rounded-full" />
+          <img src={logo} alt="" className="h-10 w-[2.5rem] rounded-[50%] object-cover" />
         </Link>
         <div className="flex items-center text-white gap-5">
           {footerIcons?.map((Icon, i) => (
