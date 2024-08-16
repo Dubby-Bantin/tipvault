@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import useFetch from "../hooks/UseFetch";
-import pythonLogo from "../assets/4518857_python_icon.png";
-import JavaImg from "../assets/4373217_java_logo_logos_icon.png";
-import reactImg from "../assets/1174949_js_react js_logo_react_react native_icon.png";
-import javascriptImg from "../assets/652581_code_command_develop_javascript_language_icon.png";
-import c from "../assets/7564189_c_logo_plus plus_plus_+ +_icon.png";
 import { Link } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SkeletonCards from "../components/Skeleton";
 import TipCard from "../components/TipCard";
-import { Tip } from "../utils/exports";
+import { getLanguageBadgeClass, Tip } from "../utils/exports";
 import { isNewTip } from "../utils/IsNewTip";
 
 // Function to dynamically assign categories based on tags or language
@@ -27,22 +22,6 @@ const assignCategory = (tip: Tip): string => {
 };
 
 // Get the badge based on the programming language
-const getLanguageBadgeClass = (language: string) => {
-  switch (language) {
-    case "Python":
-      return pythonLogo;
-    case "JavaScript":
-      return javascriptImg;
-    case "Java":
-      return JavaImg;
-    case "C++":
-      return c;
-    case "React":
-      return reactImg;
-    default:
-      return "bg-gray-500";
-  }
-};
 
 const Tips = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -152,10 +131,16 @@ const Tips = () => {
               ?.slice(start, end)
               ?.map((filteredTip) => (
                 <TipCard
+                  id={filteredTip.id}
                   key={filteredTip.id}
-                  getLanguageBadge={getLanguageBadgeClass}
+                  category={filteredTip.category}
+                  title={filteredTip.title}
+                  description={filteredTip.description}
+                  tags={filteredTip.tags}
+                  language={filteredTip.language}
+                  created_at={filteredTip.created_at}
                   isNew={isNewTip(filteredTip.created_at)}
-                  {...filteredTip}
+                  getLanguageBadge={getLanguageBadgeClass}
                 />
               ))
           )}
