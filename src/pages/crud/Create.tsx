@@ -46,7 +46,7 @@ const Create: React.FC = () => {
     setIsloading(true);
 
     axios
-      .post("http://localhost:3000/tips", newTip)
+      .post("../../../db.json", newTip)
       .then((res) => {
         setTimeout(() => {
           toast("Tip has been created", {

@@ -50,7 +50,7 @@ const Tips = () => {
   };
 
   useEffect(() => {
-    getData("/tips");
+    getData();
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);

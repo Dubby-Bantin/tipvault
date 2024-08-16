@@ -4,12 +4,14 @@ import { useState } from "react";
 const useFetch = () => {
   const [data, setData] = useState([]);
 
-  const api = "http://localhost:3000";
-
-  const getData = async (endPoint: string) => {
+  const getData = async () => {
     try {
-      const res = await axios.get(`${api}${endPoint}`);
-      setData(res.data);
+      const res = await axios("../../db.json");
+      const {
+        data: { tips },
+      } = res;
+      console.log(tips);
+      setData(tips);
     } catch (e) {
       console.log(e);
     }

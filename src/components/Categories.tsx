@@ -8,7 +8,7 @@ const Categories = () => {
       </h1>
       <div className="flex flex-wrap justify-center space-x-4">
         {categories.map(({ name, image }) => (
-          <div key={name} className="flex flex-col items-center">
+          <div key={name} className="flex flex-col items-center flex-wrap justify-center">
             <div className="p-4 bg-gray-800 rounded-full">
               <img src={image} alt={`${name} logo`} className="h-12 w-12" />
             </div>

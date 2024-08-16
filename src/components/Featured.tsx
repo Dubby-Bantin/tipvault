@@ -14,7 +14,7 @@ const Featured = () => {
   const [tips, setTips] = useState<Tip[]>([]);
 
   useEffect(() => {
-    getData("/tips");
+    getData();
   }, [getData, data]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Featured = () => {
           loop
           className="w-full"
         >
-          {tips?.slice(0, 5).map((tip) => (
+          {tips?.slice(0, 5)?.map((tip) => (
             <SwiperSlide key={tip?.title}>
               <FeatureCard
                 key={tip?.id}
