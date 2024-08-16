@@ -10,17 +10,23 @@ import { Link } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SkeletonCards from "../components/Skeleton";
 import TipCard from "../components/TipCard";
+import { Tip } from "../utils/exports";
+import { isNewTip } from "../utils/IsNewTip";
 
-interface Tip {
-  id: number;
-  title: string;
-  description: string;
-  language: string;
-  tags: string[];
-  category?: string; // Make the category optional since we are assigning it dynamically
-  created_at: string;
-}
+// Function to dynamically assign categories based on tags or language
+const assignCategory = (tip: Tip): string => {
+  const { language } = tip;
 
+  if (language === "Python" || language === "Java" || language === "C++") {
+    return "Data Science";
+  }
+  if (language === "JavaScript" || language === "React") {
+    return "Frontend";
+  }
+  return "Miscellaneous"; // Default category if no match
+};
+
+// Get the badge based on the programming language
 const getLanguageBadgeClass = (language: string) => {
   switch (language) {
     case "Python":
@@ -36,25 +42,6 @@ const getLanguageBadgeClass = (language: string) => {
     default:
       return "bg-gray-500";
   }
-};
-
-// Function to dynamically assign categories based on tags or language
-const assignCategory = (tip: Tip): string => {
-  const { language, tags } = tip;
-
-  if (language === "Python" || language === "Java" || language === "C++") {
-    return "Data Science";
-  }
-  if (language === "JavaScript" || language === "React") {
-    return "Frontend";
-  }
-  if (tags.includes("backend") || tags.includes("server")) {
-    return "Backend";
-  }
-  if (tags.includes("devops") || tags.includes("cloud")) {
-    return "DevOps";
-  }
-  return "Miscellaneous"; // Default category if no match
 };
 
 const Tips = () => {
@@ -88,13 +75,12 @@ const Tips = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-  }, [getData]);
+  }, [data, getData]);
 
   useEffect(() => {
-    // Dynamically assign categories to tips
     const categorizedTips = data.map((tip: Tip) => ({
       ...tip,
-      category: assignCategory(tip), // Assign category dynamically
+      category: assignCategory(tip),
     }));
 
     setTips(categorizedTips);
@@ -126,7 +112,7 @@ const Tips = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search tips..."
-            className="bg-transparent border-b border-primary outline-none float-right text-white p-2 rounded-lg w-full max-w-sm focus:max-w-md transition-all duration-1000 mx-auto"
+            className="bg-transparent border-b border-primary outline-none float-right text-white p-2 w-full max-w-sm focus:max-w-md transition-all duration-1000 mx-auto"
           />
           <BiSearch className="text-white absolute top-3 right-2" />
         </div>
@@ -140,8 +126,6 @@ const Tips = () => {
           >
             <option value="">Filter by Category</option>
             <option value="Frontend">Frontend</option>
-            <option value="Backend">Backend</option>
-            <option value="DevOps">DevOps</option>
             <option value="Data Science">Data Science</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
@@ -164,15 +148,14 @@ const Tips = () => {
           {isLoading ? (
             <SkeletonCards cards={8} />
           ) : (
-            filteredTips
-              ?.slice(start, end)
-              ?.map((filteredTip) => (
-                <TipCard
-                  key={filteredTip.id}
-                  getLanguageBadgeClass={getLanguageBadgeClass}
-                  {...filteredTip}
-                />
-              ))
+            filteredTips?.slice(start, end)?.map((filteredTip) => (
+              <TipCard
+                key={filteredTip.id}
+                getLanguageBadge={getLanguageBadgeClass}
+                isNew={isNewTip(filteredTip.created_at)} // Pass new tip status to TipCard
+                {...filteredTip}
+              />
+            ))
           )}
         </div>
         <div className="flex justify-center gap-10 items-center mt-6">
