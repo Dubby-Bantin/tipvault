@@ -7,9 +7,9 @@ const Banner = () => {
       <div className="absolute inset-0 w-full h-full bg-slate-950 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       <Boxes />
 
-      <div className="relative text-white text-center flex flex-col items-center justify-center rounded-lg gap-5 z-20 px-4 md:px-8 lg:px-16">
+      <div className="relative text-white text-center flex flex-col items-center justify-center rounded-lg gap-5 z-20 px-4 md:px-8 lg:px-16 py-5 md:py-8 lg:py-16">
         <TextGenerateEffect
-          className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-bold w-full md:w-[70%] font-heading"
+          className="text-[1.5rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-bold w-full md:w-[70%] font-heading"
           words="Discover, share, and enhance your coding skills effortlessly."
         />
         <p className="text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] lg:text-[1.3rem] text-gray-500 w-full md:w-[50%] font-text">
