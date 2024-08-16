@@ -26,7 +26,7 @@ const TipCard = ({
       <div className="bg-slate-900 border border-opacity-10 border-primary relative p-4 rounded-lg shadow-lg w-full max-w-[35rem]">
         {/* "New" Badge */}
         {isNew && (
-          <span className="absolute bottom-2 right-2 bg-primary text-white text-xs font-semibold px-2 py-1 rounded-full">
+          <span className="absolute bottom-10 right-2 bg-primary text-white text-xs font-semibold px-2 py-1 rounded-full">
             New
           </span>
         )}
@@ -50,22 +50,20 @@ const TipCard = ({
           </button>
         </p>
 
-        <div className="flex justify-between items-center mt-4">
-          <div className="flex gap-4">
-            {tags?.map((tag) => (
-              <Link
-                to={"/"}
-                key={tag}
-                className="text-white cursor-pointer hover:text-primary text-xs"
-              >
-                #{tag}
-              </Link>
-            ))}
-          </div>
-          <span className="text-gray-400 text-sm italic">{created_at}</span>
+        <div className="flex flex-wrap gap-2 mt-4">
+          {tags?.map((tag) => (
+            <Link
+              to={"/"}
+              key={tag}
+              className="text-white cursor-pointer hover:text-primary text-xs bg-gray-700 py-1 px-2 rounded"
+            >
+              #{tag}
+            </Link>
+          ))}
         </div>
 
-        <div className="mt-2">
+        <div className="flex flex-wrap justify-between mt-2">
+          <span className="text-gray-400 text-sm italic">{created_at}</span>
           <span className="text-gray-400 text-sm italic">
             Category: {category}
           </span>
@@ -87,7 +85,7 @@ const TipCard = ({
               </button>
             </div>
             <p className="text-gray-200 mb-4">{description}</p>
-            <div className="flex gap-4 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {tags?.map((tag) => (
                 <span
                   key={tag}
@@ -97,8 +95,8 @@ const TipCard = ({
                 </span>
               ))}
             </div>
-            <span className="text-gray-400 text-sm italic">{created_at}</span>
-            <div className="mt-2">
+            <div className="flex flex-wrap justify-between">
+              <span className="text-gray-400 text-sm italic">{created_at}</span>
               <span className="text-gray-400 text-sm italic">
                 Category: {category}
               </span>
