@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import tips from "C:\\Users\\hp\\Documents\\reactjs👾\\tipvault\\db.json";
+import { useState } from "react";
+import tips from "../../../db.json";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
