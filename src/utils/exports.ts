@@ -8,6 +8,7 @@ import JavaImg from "../assets/4373217_java_logo_logos_icon.png";
 import reactImg from "../assets/1174949_js_react js_logo_react_react native_icon.png";
 import javascriptImg from "../assets/652581_code_command_develop_javascript_language_icon.png";
 import c from "../assets/7564189_c_logo_plus plus_plus_+ +_icon.png";
+import { Tip } from "./tips";
 
 const getLanguageBadgeClass = (language: string) => {
   switch (language) {
@@ -26,6 +27,18 @@ const getLanguageBadgeClass = (language: string) => {
   }
 };
 
+const assignCategory = (tip: Tip): string => {
+  const { language } = tip;
+
+  if (language === "Python" || language === "Java" || language === "C++") {
+    return "Data Science";
+  }
+  if (language === "JavaScript" || language === "React") {
+    return "Frontend";
+  }
+  return "Miscellaneous";
+};
+
 export interface TipCardProps {
   id: string;
   title: string;
@@ -38,4 +51,11 @@ export interface TipCardProps {
   isNew: boolean;
 }
 
-export { Banner, Featured, Categories, LatestTips, getLanguageBadgeClass };
+export {
+  Banner,
+  Featured,
+  Categories,
+  LatestTips,
+  getLanguageBadgeClass,
+  assignCategory,
+};

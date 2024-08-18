@@ -5,21 +5,10 @@ import { Link } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SkeletonCards from "../components/Skeleton";
 import TipCard from "../components/TipCard";
-import { getLanguageBadgeClass } from "../utils/exports";
+import { assignCategory, getLanguageBadgeClass } from "../utils/exports";
 import { isNewTip } from "../utils/IsNewTip";
 import { Tip } from "../utils/tips"; // Import the Tip type
 
-const assignCategory = (tip: Tip): string => {
-  const { language } = tip;
-
-  if (language === "Python" || language === "Java" || language === "C++") {
-    return "Data Science";
-  }
-  if (language === "JavaScript" || language === "React") {
-    return "Frontend";
-  }
-  return "Miscellaneous";
-};
 
 // Load tips from local storage or return an empty array if none exist
 const loadTips = (): Tip[] => {
