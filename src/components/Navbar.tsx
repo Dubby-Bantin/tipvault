@@ -20,7 +20,9 @@ const Navbar = () => {
           tips
         </Link>
         <MdOutlineDarkMode />
-        <FaGithub />
+        <Link to={"https://github.com/Dubby-Bantin/tipvault"}>
+          <FaGithub />
+        </Link>
       </div>
     </div>
   );
