@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+Project Documentation
+Overview
+1.Project Name: TipVault
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2.Description: TipVault is a web-based platform for developers to share and discover programming tips. Tips are categorized by language and can be searched by keywords and tags. The platform allows users to post tips, browse tips, and filter by tags and languages.
 
-Currently, two official plugins are available:
+3.Technologies Used:
+.React
+.TypeScript
+.Tailwind CSS
+.Swiper
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+Features:
+Tip Posting: Users can post tips with a title, description, and relevant programming language.
+Categorization: Tips are categorized by programming language.
+Search Functionality: Users can search tips by keywords and tags.
+Pagination: Tips are displayed in a paginated format, 10 tips per page.
+Responsive Design: The platform is designed to be fully responsive, ensuring a seamless experience on all devices.
+Featured Tips Carousel: A carousel of featured tips is displayed on the homepage.
+Pages: Home-page, Tips page, Create-tip-page.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+HOME-PAGE:
+![image](https://github.com/user-attachments/assets/0444803c-4d88-41f0-a523-2104510b7d0b),
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+TIPS-PAGE:
+![image](https://github.com/user-attachments/assets/d9de50d5-80b1-4860-b35b-25871ed30c76)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+CREATE-TIP-PAGE:
+![image](https://github.com/user-attachments/assets/ebf1a9ff-aba4-4609-a8b2-180bc4a74c71)
