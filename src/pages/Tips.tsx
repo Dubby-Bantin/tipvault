@@ -5,16 +5,13 @@ import { Link } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SkeletonCards from "../components/Skeleton";
 import TipCard from "../components/TipCard";
-import { assignCategory, getLanguageBadgeClass } from "../utils/exports";
+import {
+  assignCategory,
+  getLanguageBadgeClass,
+  loadTips,
+} from "../utils/exports";
 import { isNewTip } from "../utils/IsNewTip";
 import { Tip } from "../utils/tips"; // Import the Tip type
-
-
-// Load tips from local storage or return an empty array if none exist
-const loadTips = (): Tip[] => {
-  const savedTips = localStorage.getItem('tips');
-  return savedTips ? JSON.parse(savedTips) : [];
-};
 
 const Tips = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -116,20 +113,22 @@ const Tips = () => {
           {isLoading ? (
             <SkeletonCards cards={8} />
           ) : (
-            filteredTips?.slice(start, end)?.map((filteredTip) => (
-              <TipCard
-                id={filteredTip.id}
-                key={filteredTip.id}
-                category={filteredTip.category}
-                title={filteredTip.title}
-                description={filteredTip.description}
-                tags={filteredTip.tags}
-                language={filteredTip.language}
-                created_at={filteredTip.created_at}
-                isNew={isNewTip(filteredTip.created_at)}
-                getLanguageBadge={getLanguageBadgeClass}
-              />
-            ))
+            filteredTips
+              ?.slice(start, end)
+              ?.map((filteredTip) => (
+                <TipCard
+                  id={filteredTip.id}
+                  key={filteredTip.id}
+                  category={filteredTip.category}
+                  title={filteredTip.title}
+                  description={filteredTip.description}
+                  tags={filteredTip.tags}
+                  language={filteredTip.language}
+                  created_at={filteredTip.created_at}
+                  isNew={isNewTip(filteredTip.created_at)}
+                  getLanguageBadge={getLanguageBadgeClass}
+                />
+              ))
           )}
         </div>
         <div className="flex justify-center gap-10 items-center mt-6">

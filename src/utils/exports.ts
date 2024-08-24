@@ -10,6 +10,16 @@ import javascriptImg from "../assets/652581_code_command_develop_javascript_lang
 import c from "../assets/7564189_c_logo_plus plus_plus_+ +_icon.png";
 import { Tip } from "./tips";
 
+const saveTips = (tips: Tip[]) => {
+  localStorage.setItem("tips", JSON.stringify(tips));
+};
+
+// Load tips from local storage or return an empty array if none exist
+const loadTips = (): Tip[] => {
+  const savedTips = localStorage.getItem("tips");
+  return savedTips ? JSON.parse(savedTips) : [];
+};
+
 const getLanguageBadgeClass = (language: string) => {
   switch (language) {
     case "Python":
@@ -58,4 +68,6 @@ export {
   LatestTips,
   getLanguageBadgeClass,
   assignCategory,
+  saveTips,
+  loadTips,
 };

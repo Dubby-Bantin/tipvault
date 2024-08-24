@@ -1,10 +1,12 @@
 import { useEffect } from "react";
-import { Banner, Featured, Categories, LatestTips } from "../utils/exports";
-import { Tip, tips } from "../utils/tips";
-
-const saveTips = (tips: Tip[]) => {
-  localStorage.setItem("tips", JSON.stringify(tips));
-};
+import {
+  Banner,
+  Featured,
+  Categories,
+  LatestTips,
+  saveTips,
+} from "../utils/exports";
+import { tips } from "../utils/tips";
 
 const Home = () => {
   useEffect(() => {
